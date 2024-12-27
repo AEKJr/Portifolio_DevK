@@ -1,0 +1,275 @@
+:root {
+  --base-font-size: 16px;
+  --background-color: hsl(0, 0%, 0%);
+  --header-background: hsl(0, 0%, 7%);
+  --link-color: hsla(157, 100%, 90%, 0.7);
+  --hover-color: hsl(157, 100%, 50%);
+  --border-color: hsl(279, 94%, 32%);
+  --box-shadow-btn: hsla(279, 94%, 32%, 0.502);
+  --box-shadow-ligth: hsl(179, 100%, 79%);
+  --color-wave1: hsl(279, 94%, 32%);
+  --color-wave2: hsl(274, 66%, 31%);
+  --color-wave3: hsl(260, 36%, 31%);
+  --color-wave4: hsl(201, 23%, 26%);
+  --color-wave5: hsl(144, 47%, 25%);
+  --color-wave6: hsl(130, 75%, 26%);
+  --color-wave7: hsl(124, 100%, 27%);
+  --image-height-mobile: 5rem;
+  --image-height-tablet: 6rem;
+  --image-height-desktop: 7.5rem;
+  --header-height-mobile: auto;
+  --header-height-tablet: 8rem;
+  --header-height-desktop: 10rem;
+}
+
+body {
+  background: var(--background-color);
+  font-size: var(--base-font-size);
+  min-height: 100vh;
+}
+
+header {
+  background: var(--header-background);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: var(--header-height-desktop);
+  padding: 1.25rem 1.25rem 1.25rem 1.875rem;
+  border-radius: 0 0 0.625rem 0.625rem;
+  position: relative;
+  box-shadow: 0 -1.5px 5px 1px var(--box-shadow-ligth);
+
+  &::after {
+    position: absolute;
+    content: '';
+    top: 6px;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    transform: scale(1) translateZ(0);
+    filter: blur(10px);
+    background: linear-gradient(
+      to right,
+      var(--color-wave1),
+      var(--color-wave2),
+      var(--color-wave3),
+      var(--color-wave4),
+      var(--color-wave5),
+      var(--color-wave6),
+      var(--color-wave7),
+      var(--color-wave6),
+      var(--color-wave5),
+      var(--color-wave4),
+      var(--color-wave3),
+      var(--color-wave2),
+      var(--color-wave1)
+    );
+    background-size: 200% 200%;
+    animation: animateGlow 2.5s linear infinite;
+  }
+}
+
+@keyframes animateGlow {
+  0% {
+    background-position: 200% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@supports (animation: wave 1s) {
+  header {
+    animation: animateGlow 2.5s linear infinite;
+  }
+}
+
+header img {
+  height: var(--image-height-desktop);
+}
+
+header a {
+  color: var(--link-color);
+  border-top: 0.125rem solid var(--border-color);
+  border-right: 0.125rem solid var(--border-color);
+  box-shadow: -0.3125rem 0.3125rem 0.57rem 0.1875rem var(--box-shadow-btn);
+  border-radius: 0.3125rem 1.5625rem / 0.1875rem 1.25rem;
+  padding: 0.5rem 0.75rem;
+  margin: 0.75rem 1.25rem 1.25rem 1rem;
+  font-size: 1rem;
+  transition: box-shadow 0.5s, color 2s, transform 200ms, outline 0.5s;
+  display: inline-block;
+  will-change: transform, box-shadow;
+}
+
+header a:hover {
+  transform: scale(1.05);
+  box-shadow: 0.0625rem 0.0625rem 0.4375rem 0.125rem var(--border-color),
+    -0.375rem 0.37rem 0.75rem 0.2rem var(--border-color);
+  color: var(--hover-color);
+  transition: 200ms linear;
+}
+
+header a:focus {
+  outline: 0.125rem solid var(--hover-color);
+  outline-offset: 0.125rem;
+  border-top: 0.125rem solid transparent;
+  border-right: 0.125rem solid transparent;
+  box-shadow: 0 0 0.75rem 0.25rem var(--hover-color);
+  transition: outline 2s, box-shadow 0.5s;
+}
+
+nav ul {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 4rem;
+}
+.ham {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 400ms;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.hamRotate.active {
+  transform: rotate(45deg);
+}
+.hamRotate180.active {
+  transform: rotate(180deg);
+}
+.line {
+  fill: none;
+  transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+  stroke: var(--link-color);
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+.ham6 .top {
+  stroke-dasharray: 40 172;
+}
+.ham6 .middle {
+  stroke-dasharray: 40 111;
+}
+.ham6 .bottom {
+  stroke-dasharray: 40 172;
+}
+.ham6.active .top {
+  stroke-dashoffset: -132px;
+}
+.ham6.active .middle {
+  stroke-dashoffset: -71px;
+}
+.ham6.active .bottom {
+  stroke-dashoffset: -132px;
+}
+
+.menu-hamburguer {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+.nav-menu {
+  display: none;
+}
+
+.nav-menu.active {
+  display: block;
+}
+
+/* Media queries */
+@media (max-width: 480px) {
+  header {
+    display: grid;
+    grid-template-columns: 0.6fr 1fr 0.2fr;
+    height: var(--header-height-mobile);
+    padding: 0.75rem 1rem 0.75rem 1rem;
+    animation: wave 8s linear infinite running;
+  }
+
+  header img {
+    height: var(--image-height-mobile);
+    align-self: center;
+  }
+  header a {
+    display: grid;
+    padding: 0.4rem 0.75rem;
+    margin: 0 0.5rem 0.75rem;
+    font-size: 0.75rem;
+    text-align: center;
+  }
+  nav ul {
+    display: grid;
+    padding: 2rem 0 0;
+    translate: 0.75rem -0.8rem;
+  }
+  .menu-hamburguer {
+    grid-column: 3;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+  }
+  .ham6 {
+    translate: 0.75rem -0.8rem;
+  }
+}
+/* Tablet styles */
+@media (min-width: 481px) and (max-width: 768px) {
+  header {
+    display: grid;
+    grid-template-columns: 0.75fr 1fr;
+    height: var(--header-height-tablet);
+    padding: 1rem;
+  }
+
+  header img {
+    height: var(--image-height-tablet);
+  }
+
+  header a {
+    display: grid;
+    padding: 0.5rem 1rem;
+    margin: 0.75rem;
+    font-size: 0.85rem;
+    text-align: center;
+  }
+  nav ul {
+    display: flex;
+    padding: 0;
+    flex-direction: column;
+  }
+  .menu-hamburguer {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+/* Desktop styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+  header {
+    display: grid;
+    grid-template-columns: 25% 75%; /* Two columns layout */
+    height: var(--header-height-desktop); /* Height for desktop */
+    padding: 1.25rem; /* Using rem for padding */
+  }
+
+  header img {
+    height: var(--image-height-desktop);
+  }
+}
+
+/* Large Desktop styles */
+@media (min-width: 1025px) {
+  header {
+    display: grid;
+    grid-template-columns: 25% 75%; /* Two columns layout */
+    height: var(--header-height-desktop); /* Height for desktop */
+    padding: 1.25rem; /* Using rem for padding */
+  }
+
+  header img {
+    height: var(--image-height-desktop);
+  }
+}

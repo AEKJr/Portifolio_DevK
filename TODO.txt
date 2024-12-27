@@ -1,0 +1,4 @@
+Manter o outline/focus na pagina seguinte
+header fixo e reduz com rolagem
+texto animado
+grid no nav
